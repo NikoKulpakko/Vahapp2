@@ -10,7 +10,7 @@ using Vahapp2.Models;
 
 namespace Vahapp2.Controllers
 {
-    public class CategoriesController : Controller
+    public class CategoriesController : Controller //Testausta
     {
         private VahappEntities db = new VahappEntities();
 
