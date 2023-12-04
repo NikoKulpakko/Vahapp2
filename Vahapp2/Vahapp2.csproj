@@ -126,6 +126,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ArticlesController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoansController.cs" />
@@ -243,6 +244,10 @@
     <Content Include="Views\Loans\Details.cshtml" />
     <Content Include="Views\Loans\Edit.cshtml" />
     <Content Include="Views\Loans\Index.cshtml" />
+    <Content Include="Views\Articles\Index.cshtml" />
+    <Content Include="Views\Articles\Create.cshtml" />
+    <Content Include="Views\Articles\Delete.cshtml" />
+    <Content Include="Views\Articles\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
