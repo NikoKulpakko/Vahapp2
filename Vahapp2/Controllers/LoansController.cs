@@ -14,12 +14,14 @@ namespace Vahapp2.Controllers
     {
         private VahappEntities db = new VahappEntities();
 
-        // GET: Loans
+        //GET: Loans
         public ActionResult Index()
         {
-            var loans = db.Loans.Include(l => l.Articles).Include(l => l.Users);
+            var loans = db.Loans.Include(l => l.Articles).Include(l => l.Users).Include(l => l.Articles.Categories);
             return View(loans.ToList());
         }
+
+
 
         // GET: Loans/Details/5
         public ActionResult Details(int? id)
@@ -38,28 +40,40 @@ namespace Vahapp2.Controllers
 
         // GET: Loans/Create
         public ActionResult Create()
+            
+        
+        //Dropdownien täytöt
         {
-            ViewBag.ArticleID = new SelectList(db.Articles, "ArticleID", "Name");
-            ViewBag.UserID = new SelectList(db.Users, "UserID", "Password");
-            return View();
+            ViewBag.ArticleID = new SelectList(db.Articles, "ArticleID", "ArticleName");
+            ViewBag.UserID = new SelectList(db.Users, "UserID", "Name");
+            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName");
+                return View();
         }
 
-        // POST: Loans/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+    // POST: Loans/Create
+    // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+    // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+    [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "LoanID,UserID,ArticleID,Loandate,Returndate,Duedate")] Loans loans)
+        
+        public ActionResult Create([Bind(Include = "LoanID,Name,UserID,ArticleID,CategoryID,CategoryName,Categories,Loandate,Returndate,Duedate,ArticleName")] Loans loans)
         {
+            
+
             if (ModelState.IsValid)
             {
+                
                 db.Loans.Add(loans);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ArticleID = new SelectList(db.Articles, "ArticleID", "Name", loans.ArticleID);
-            ViewBag.UserID = new SelectList(db.Users, "UserID", "Password", loans.UserID);
+            //Poistettu Name
+
+            
+            ViewBag.ArticleID = new SelectList(db.Articles, "ArticleID", "ArticleName", loans.ArticleID);
+            ViewBag.UserID = new SelectList(db.Users, "UserID", "Name", loans.UserID);
+            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", loans.Articles.CategoryID);
             return View(loans);
         }
 

@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Vahapp2.Models.Loans>
+﻿@*@model Vahapp2.Models.Loans*@
+@model IEnumerable<Vahapp2.Models.Loans>
 
 @{
     ViewBag.Title = "Index";
@@ -31,6 +32,11 @@
         <th>
             @Html.DisplayNameFor(model => model.Articles.ArticleID)
         </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Articles.Categories.CategoryName)
+        </th>
+
         <th>
             @Html.DisplayNameFor(model => model.Loandate)
         </th>
@@ -63,6 +69,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Articles.ArticleID)
             </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Articles.Categories.CategoryName)
+            </td>
+
             <td>
                 @Html.DisplayFor(modelItem => item.Loandate)
             </td>

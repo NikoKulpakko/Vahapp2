@@ -10,6 +10,49 @@
     <h4>Loans</h4>
     <hr />
     <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Users.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Users.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Users.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Users.Email)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Articles.ArticleName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Articles.ArticleName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Articles.Categories.CategoryName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Articles.Categories.CategoryName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Articles.SerialNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Articles.SerialNumber)
+        </dd>
+
+
         <dt>
             @Html.DisplayNameFor(model => model.Loandate)
         </dt>
@@ -26,33 +69,15 @@
             @Html.DisplayFor(model => model.Returndate)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Duedate)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Duedate)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Articles.SerialNumber)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Articles.SerialNumber)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Users.Password)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Users.Password)
-        </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.LoanID }) |
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.LoanID }) |*@
     @Html.ActionLink("Back to List", "Index")
 </p>
