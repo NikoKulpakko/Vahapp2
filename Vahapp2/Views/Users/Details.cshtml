@@ -1,58 +1,55 @@
 ﻿@model Vahapp2.Models.Users
 
 @{
-    Layout = null;
+    ViewBag.Title = "Details";
 }
 
 <!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Details</title>
-</head>
-<body>
-    <div>
-        <h4>Users</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Password)
-            </dt>
+
     
-            <dd>
-                @Html.DisplayFor(model => model.Password)
-            </dd>
+<h2>Details</h2>
+
+<div>
+    <h4>Users</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
     
-            <dt>
-                @Html.DisplayNameFor(model => model.Name)
-            </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Password)
+        </dd>
     
-            <dd>
-                @Html.DisplayFor(model => model.Name)
-            </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
     
-            <dt>
-                @Html.DisplayNameFor(model => model.Email)
-            </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
     
-            <dd>
-                @Html.DisplayFor(model => model.Email)
-            </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
     
-            <dt>
-                @Html.DisplayNameFor(model => model.Phone)
-            </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
     
-            <dd>
-                @Html.DisplayFor(model => model.Phone)
-            </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
     
-        </dl>
-    </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.UserID }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
-</body>
-</html>
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+    
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.UserID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
