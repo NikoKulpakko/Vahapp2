@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Vahapp2.Models.Articles>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Articles</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SerialNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ArticleName)
+        </th>
+        <th style="display:none">
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th style="display:none">
+            @Html.DisplayNameFor(model => model.Image)
+        </th>
+        <th style="display:none">
+            @Html.DisplayNameFor(model => model.Purchasedate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th style="display:none">
+            @Html.DisplayNameFor(model => model.Warranty)
+        </th>
+        <th>
+            Category
+            @*@Html.DisplayNameFor(model => model.CategoryID)*@
+        </th>
+        <th></th>
+    </tr>
+    @*Näkyvyysmääre on poistettu osasta kentistä listanäkymän selkeyttämiseksi.
+        Mikäli haluat kentän näkyviin poista style="display:none"*@
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SerialNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArticleName)
+            </td>
+            <td style="display:none">
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td style="display:none">
+                @Html.DisplayFor(modelItem => item.Image)
+            </td>
+            <td style="display:none">
+                @Html.DisplayFor(modelItem => item.Purchasedate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td style="display:none">
+                @Html.DisplayFor(modelItem => item.Warranty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Categories.CategoryName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ArticleID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ArticleID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ArticleID })
+            </td>
+        </tr>
+    }
+
+</table>

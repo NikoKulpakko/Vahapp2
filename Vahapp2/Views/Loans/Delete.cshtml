@@ -1,0 +1,64 @@
+﻿@model Vahapp2.Models.Loans
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Loans</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Loandate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Loandate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Returndate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Returndate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Duedate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Duedate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Articles.SerialNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Articles.SerialNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Users.Password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Users.Password)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
