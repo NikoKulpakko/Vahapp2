@@ -17,8 +17,16 @@ namespace Vahapp2.Controllers
         // GET: Loans
         public ActionResult Index()
         {
-            var loans = db.Loans.Include(l => l.Articles).Include(l => l.Users);
-            return View(loans.ToList());
+            if (Session["BasicUser"] == null && Session["AdminUser"] == null)
+            {
+                return RedirectToAction("login", "home");
+            }
+            //Tässä rajataan ulos kaikki muut paitsi sisäänkirjautuneet
+            else
+            {
+                var loans = db.Loans.Include(l => l.Articles).Include(l => l.Users);
+                return View(loans.ToList());
+            }
         }
 
         // GET: Loans/Details/5

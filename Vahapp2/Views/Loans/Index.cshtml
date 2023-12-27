@@ -3,78 +3,91 @@
 @{
     ViewBag.Title = "Index";
 }
-
-<h2>Loans</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-
-
-        <th>
-            @Html.DisplayNameFor(model => model.Users.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Users.UserID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Users.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Articles.ArticleName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Articles.ArticleID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Loandate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Returndate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Duedate)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
+@*Tässä rajataan koko näkymä ainoastaan adminille. Alle on Elseen on kehitettävä esim. 
+Viewbagillä näkymä missä user näkee vain omat lainat?*@
+@{ if (Session["AdminUser"] != null)
     {
-        <tr>
+        <h2>Loans</h2>
+
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <table class="table">
+            <tr>
 
 
-            <td>
-                @Html.DisplayFor(modelItem => item.Users.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Users.UserID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Users.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Articles.ArticleName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Articles.ArticleID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Loandate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Returndate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Duedate)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.LoanID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.LoanID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.LoanID })
-            </td>
-        </tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Users.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Users.UserID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Users.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Articles.ArticleName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Articles.ArticleID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Loandate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Returndate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Duedate)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Users.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Users.UserID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Users.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Articles.ArticleName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Articles.ArticleID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Loandate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Returndate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Duedate)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.LoanID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.LoanID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.LoanID })
+                    </td>
+                </tr>
+            }
+
+        </table>
     }
 
-</table>
+    else if (Session["BasicUser"] != null)
+    {
+        <h2>Own Loans</h2>
+    }
+
+}
+
+
