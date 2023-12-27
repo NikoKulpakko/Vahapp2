@@ -16,8 +16,17 @@ namespace Vahapp2.Controllers
 
         // GET: Categories
         public ActionResult Index()
+
         {
-            return View(db.Categories.ToList());
+            if (Session["BasicUser"] == null && Session["AdminUser"] == null)
+            {
+                return RedirectToAction("login", "home");
+            }
+            //Tässä rajataan ulos kaikki muut paitsi sisäänkirjautuneet
+            else
+            {
+                return View(db.Categories.ToList());
+            }
         }
 
         // GET: Categories/Details/5

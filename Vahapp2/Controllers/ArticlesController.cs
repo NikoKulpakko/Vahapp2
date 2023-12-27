@@ -14,8 +14,16 @@ namespace Vahapp2.Controllers
         // GET: Articles
         public ActionResult Index()
         {
-            var articles = db.Articles.Include(a => a.Categories);
-            return View(articles.ToList());
+            if (Session["BasicUser"] == null && Session["AdminUser"] == null)
+            {
+                return RedirectToAction("login", "home");
+            }
+            //Tässä rajataan ulos kaikki muut paitsi sisäänkirjautuneet
+            else
+            {
+                var articles = db.Articles.Include(a => a.Categories);
+                return View(articles.ToList());
+            }
         }
 
         public ActionResult Create()
