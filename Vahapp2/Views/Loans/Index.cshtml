@@ -11,9 +11,10 @@
 <button onclick="location.href='@Url.Action("Create", "Loans")'" class="btn btn-primary">Create New Loan</button>
 <br/>
 <br/>
-<h3>All your loans</h3>
+<h3>All loans</h3>
+<h4>Total loans @Model.Count()</h4>
 
-<table class="table">
+<table class="table table-hover">
     <tr>
 
 
