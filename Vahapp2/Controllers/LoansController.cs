@@ -61,7 +61,6 @@ namespace Vahapp2.Controllers
         //    return Json(list);
         //}
 
-        //public ActionResult Create([Bind(Include = "LoanID,Name,UserID,ArticleID,CategoryID,CategoryName,Categories,Loandate,Returndate,Duedate,ArticleName")] Loans loans)
         // GET: Loans/Create
         public ActionResult Create()
         {
