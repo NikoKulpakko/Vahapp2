@@ -6,6 +6,14 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <style>
+        .form-container {
+            display: grid;
+            grid-template-columns: repeat(3,0.3fr);
+            grid-gap: 10px;
+        }
+    </style>
+    @*form-container yllä Articles Create näkymän esittämiseksi useammassa kolumnissa*@
 </head>
 <body>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">

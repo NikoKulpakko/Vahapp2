@@ -6,12 +6,29 @@
 
 <h2>Articles</h2>
 
+@section scripts {
+
+    <script type="text/javascript">
+        $("#singleSelectedContactID").on("change", function () {
+
+            var selValue = $("#singleSelectedContactID").val();
+            document.getElementById("ContactType").value = selValue;
+        });
+    </script>
+}
+
+<br />
+<br />
+
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
+            Category
+        </th>
+        <th style="display:none">
             @Html.DisplayNameFor(model => model.SerialNumber)
         </th>
         <th>
@@ -20,8 +37,8 @@
         <th style="display:none">
             @Html.DisplayNameFor(model => model.Price)
         </th>
-        <th style="display:none">
-            @Html.DisplayNameFor(model => model.Image)
+        <th>
+            @Html.DisplayNameFor(model => model.Info)
         </th>
         <th style="display:none">
             @Html.DisplayNameFor(model => model.Purchasedate)
@@ -32,11 +49,15 @@
         <th style="display:none">
             @Html.DisplayNameFor(model => model.Warranty)
         </th>
-        <th>
-            Category
-            @*@Html.DisplayNameFor(model => model.CategoryID)*@
+        <th style="display:none">
+            @Html.DisplayNameFor(model => model.Photopath)
         </th>
-        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.Image)
+        </th>
+        <th>
+            Control Panel
+        </th>
     </tr>
     @*Näkyvyysmääre on poistettu osasta kentistä listanäkymän selkeyttämiseksi.
         Mikäli haluat kentän näkyviin poista style="display:none"*@
@@ -44,6 +65,9 @@
     {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.Categories.CategoryName)
+            </td>
+            <td style="display:none">
                 @Html.DisplayFor(modelItem => item.SerialNumber)
             </td>
             <td>
@@ -52,8 +76,8 @@
             <td style="display:none">
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
-            <td style="display:none">
-                @Html.DisplayFor(modelItem => item.Image)
+            <td style="height:200px; width:300px;">
+                @Html.DisplayFor(modelItem => item.Info)
             </td>
             <td style="display:none">
                 @Html.DisplayFor(modelItem => item.Purchasedate)
@@ -64,12 +88,41 @@
             <td style="display:none">
                 @Html.DisplayFor(modelItem => item.Warranty)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Categories.CategoryName)
+            <td style="display:none">
+                @Html.DisplayFor(modelItem => item.Photopath)
             </td>
+            <td style="display:none">
+                @Html.DisplayFor(modelItem => item.Image)
+            </td>
+            <td>
+                @if (item.Photopath != null)
+                {
+
+                    var imgsrc = "/Content/Images/" + item.Photopath;
+                    <img src="@imgsrc" alt="There should be a picture here" style="width:200px; height:200px" />
+                }
+                else
+                { <img src="~/img/avatar-default.jpg" style="max-width:100px;max-height:100px" />
+                }
+            </td>
+            @*<td>
+                    @if (item.Image != null)
+                    {
+                        var base64 = Convert.ToBase64String(item.Image);
+                        var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                        <img src="@imgsrc" style="max-width:100px;max-height:100px" />
+                    }
+                    else
+                    { <img src="~/img/avatar-default.jpg" style="max-width:100px;max-height:100px" />
+                    }
+                </td>*@
+
+
+
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.ArticleID }) |
                 @Html.ActionLink("Details", "Details", new { id = item.ArticleID }) |
+                @Html.ActionLink("Images", "InsertPicture", new { id = item.ArticleID }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.ArticleID })
             </td>
         </tr>
