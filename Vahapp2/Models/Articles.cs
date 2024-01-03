@@ -11,7 +11,8 @@ namespace Vahapp2.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Articles
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,6 +25,7 @@ namespace Vahapp2.Models
         public int CategoryID { get; set; }
         public string SerialNumber { get; set; }
         public string ArticleName { get; set; }
+       
         public Nullable<decimal> Price { get; set; }
         public byte[] Image { get; set; }
         public System.DateTime Purchasedate { get; set; }
