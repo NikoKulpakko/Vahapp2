@@ -22,7 +22,13 @@
                     <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("Categories", "Index", "Categories", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("Loans", "Index", "Loans", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Users", "Index", "Users", new { area = "" }, new { @class = "nav-link" })</li>
+                    @{ if (Session["AdminUser"] != null)
+                        {
+                            <li>@Html.ActionLink("Users", "Index", "Users" + "", new { area = "" }, new { @class = "nav-link" })</li>
+} } 
+                    <li>@Html.ActionLink("Log out", "Logout", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Admin Login", "Login", "Admin", new { area = "" }, new { @class = "nav-link" })</li>
+
                 </ul>
             </div>
         </div>
@@ -31,7 +37,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Kouluprojekti 2023</p>
+            <p>&copy; @DateTime.Now.Year - VaHapp</p>
         </footer>
     </div>
 

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using Vahapp2.Models;
 
 namespace Vahapp2.Controllers
@@ -14,10 +15,43 @@ namespace Vahapp2.Controllers
     {
         private VahappEntities db = new VahappEntities();
 
+        //public ActionResult Login()
+        //{
+        //    return View();
+        //}
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+
+        //public ActionResult Login(Users users)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var validUser = db.Users.FirstOrDefault(u => u.Name == users.Name && u.Password == users.Password); 
+        //        if (validUser != null)
+        //        {
+        //            FormsAuthentication.SetAuthCookie(users.Name, false);
+        //            return RedirectToAction("Index", "Home");
+        //        }
+        //        else
+        //        {
+        //            ModelState.AddModelError("", "Invalid username or password.");
+        //        }
+        //    }
+        //    return View(users);
+        //}
         // GET: Users
+        
         public ActionResult Index()
         {
-            return View(db.Users.ToList());
+            if (Session["AdminUser"] != null) {
+                return View(db.Users.ToList());
+            }
+            //Tässä Rajataan koko kontrolleri ainoastaan Adminille
+            else
+            {
+                return RedirectToAction("login", "home");
+            }
         }
 
         // GET: Users/Details/5

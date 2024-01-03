@@ -17,8 +17,16 @@ namespace Vahapp2.Controllers
         //GET: Loans
         public ActionResult Index()
         {
-            var loans = db.Loans.Include(l => l.Articles).Include(l => l.Users).Include(l => l.Articles.Categories);
-            return View(loans.ToList());
+            if (Session["BasicUser"] == null && Session["AdminUser"] == null)
+            {
+                return RedirectToAction("login", "home");
+            }
+            //Tässä rajataan ulos kaikki muut paitsi sisäänkirjautuneet
+            else
+            {
+                var loans = db.Loans.Include(l => l.Articles).Include(l => l.Users);
+                return View(loans.ToList());
+            }
         }
 
 
@@ -38,45 +46,49 @@ namespace Vahapp2.Controllers
             return View(loans);
         }
 
+        //public JsonResult valinta(int id)
+        //{
+        //    var artikkeli = db.Articles.Where(a => a.ArticleID == id);
+        //    List<string> list = new List<string>();
+        //    foreach (Articles a in artikkeli)
+        //    {
+        //        list.Add(a.ArticleName);
+        //    }
+        //    if (artikkeli == null)
+        //    {
+        //        return null;
+        //    }
+        //    return Json(list);
+        //}
+
         // GET: Loans/Create
         public ActionResult Create()
-            
-        
-        //Dropdownien täytöt
         {
             ViewBag.ArticleID = new SelectList(db.Articles, "ArticleID", "ArticleName");
             ViewBag.UserID = new SelectList(db.Users, "UserID", "Name");
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName");
-                return View();
+            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryName", "CategoryName");
+            return View();
         }
 
-    // POST: Loans/Create
-    // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-    // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-    [HttpPost]
+        // POST: Loans/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        
-        public ActionResult Create([Bind(Include = "LoanID,Name,UserID,ArticleID,CategoryID,CategoryName,Categories,Loandate,Returndate,Duedate,ArticleName")] Loans loans)
+        public ActionResult Create([Bind(Include = "LoanID,UserID,ArticleID,ArticleName,CategoryName,Loandate,Returndate,Duedate")] Loans loans)
         {
-            
-
             if (ModelState.IsValid)
             {
-                
                 db.Loans.Add(loans);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            //Poistettu Name
-
-            
-            ViewBag.ArticleID = new SelectList(db.Articles, "ArticleID", "ArticleName", loans.ArticleID);
-            ViewBag.UserID = new SelectList(db.Users, "UserID", "Name", loans.UserID);
+            ViewBag.ArticleID = new SelectList(db.Articles, "ArticleID", "SerialNumber", loans.ArticleID);
+            ViewBag.UserID = new SelectList(db.Users, "UserID", "Password", loans.UserID);
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", loans.Articles.CategoryID);
             return View(loans);
         }
-
         // GET: Loans/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -89,8 +101,9 @@ namespace Vahapp2.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ArticleID = new SelectList(db.Articles, "ArticleID", "Name", loans.ArticleID);
-            ViewBag.UserID = new SelectList(db.Users, "UserID", "Password", loans.UserID);
+            ViewBag.ArticleID = new SelectList(db.Articles, "ArticleID", "ArticleName", loans.ArticleID);
+            ViewBag.UserID = new SelectList(db.Users, "UserID", "Name", loans.UserID);
+            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", loans.Articles.CategoryID);
             return View(loans);
         }
 
