@@ -21,32 +21,35 @@ Viewbagillä näkymä missä user näkee vain omat lainat?*@
     <tr>
 
 
-                <th>
-                    @Html.DisplayNameFor(model => model.Users.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Users.UserID)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Users.Email)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Articles.ArticleName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Articles.ArticleID)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Loandate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Returndate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Duedate)
-                </th>
-                <th></th>
-            </tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Users.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Users.UserID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Users.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Articles.ArticleName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Articles.ArticleID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Articles.Categories.CategoryName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Loandate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Returndate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Duedate)
+        </th>
+        <th></th>
+    </tr>
 
             @foreach (var item in Model)
             {
@@ -67,6 +70,9 @@ Viewbagillä näkymä missä user näkee vain omat lainat?*@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Articles.ArticleID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Articles.Categories.CategoryName)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Loandate)

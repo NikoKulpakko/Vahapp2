@@ -6,7 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Vahapp2.Data;
 using Vahapp2.Models;
+
 
 namespace Vahapp2.Controllers
 {
@@ -45,28 +47,35 @@ namespace Vahapp2.Controllers
             }
             return View(loans);
         }
+        //Dropdownin valinta testausta----------------------------------------------------
+        public JsonResult selection(int? id)
+        {
+            var articles = db.Articles.Where(a => a.Categories.CategoryID == id);
 
-        //public JsonResult valinta(int id)
-        //{
-        //    var artikkeli = db.Articles.Where(a => a.ArticleID == id);
-        //    List<string> list = new List<string>();
-        //    foreach (Articles a in artikkeli)
-        //    {
-        //        list.Add(a.ArticleName);
-        //    }
-        //    if (artikkeli == null)
-        //    {
-        //        return null;
-        //    }
-        //    return Json(list);
-        //}
+            List<ArticleData> list = new List<ArticleData>();
 
+            foreach (Articles a in articles)
+            {
+                ArticleData ad = new ArticleData();
+                ad.ArticleID = a.ArticleID;
+                ad.ArticleName = a.ArticleName;
+                ad.Status = a.Status;
+                if (a.Status == "Lainattavissa") { 
+                list.Add(ad);
+                }
+            }
+
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+        //Testaus loppuu--------------------------------------------------------------------
+
+        
         // GET: Loans/Create
         public ActionResult Create()
         {
             ViewBag.ArticleID = new SelectList(db.Articles, "ArticleID", "ArticleName");
             ViewBag.UserID = new SelectList(db.Users, "UserID", "Name");
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryName", "CategoryName");
+            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName");
             return View();
         }
 
