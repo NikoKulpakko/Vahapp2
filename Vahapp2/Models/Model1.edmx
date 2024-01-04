@@ -15,11 +15,11 @@
           <Property Name="ArticleName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Price" Type="decimal" Precision="7" Scale="2" />
           <Property Name="Image" Type="image" />
-          <Property Name="Purchasedate" Type="date" Nullable="false" />
+          <Property Name="Purchasedate" Type="date" />
           <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Warranty" Type="nvarchar" MaxLength="50" />
           <Property Name="Photopath" Type="nvarchar" MaxLength="255" />
-          <Property Name="Info" Type="nvarchar" MaxLength="400" Nullable="false" />
+          <Property Name="Info" Type="nvarchar" MaxLength="400" />
         </EntityType>
         <EntityType Name="Categories">
           <Key>
@@ -168,13 +168,13 @@
           <Property Name="ArticleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Price" Type="Decimal" Precision="7" Scale="2" />
           <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="Purchasedate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Purchasedate" Type="DateTime" Precision="0" />
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Warranty" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Categories" Relationship="Self.FK_Articles_Categories" FromRole="Articles" ToRole="Categories" />
           <NavigationProperty Name="Loans" Relationship="Self.FK_Loans_Articles" FromRole="Articles" ToRole="Loans" />
           <Property Name="Photopath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Info" Type="String" Nullable="false" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="Info" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Categories">
           <Key>

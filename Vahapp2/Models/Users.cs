@@ -27,11 +27,11 @@ namespace Vahapp2.Models
         public string Email { get; set; }
         public string Phone { get; set; }
     
-        public string LoginErrorMessage { get; set; }
-    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LoanDetails> LoanDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Loans> Loans { get; set; }
+
+        public string LoginErrorMessage { get; set; }
     }
 }
