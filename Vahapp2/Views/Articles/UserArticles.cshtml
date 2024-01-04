@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Vahapp2.Models.Articles>
+
+@{
+    ViewBag.Title = "UserArticles";
+}
+
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            $(".showArticleClass").click(function () {
+                let categoryId = $(this).data("CategoryID");
+                alert("klikkasit kategoriaa: " + categoryId);
+                //var url = "/Categories/_UserArticles/?CategoryID=" + articleId;
+                //$("_#articleInfo" + articleId).append(" <b>Ladataan categorian " + articleId + " rivejä...</b>");
+
+                //var $detailDiv = $("#categoryInfo_" + articleId);
+                //$.get(url, function (data) {
+                //    $detailDiv.replaceWith(data);
+                
+            });
+        });
+    </script>
+}
+
+    <h2>Articles for loan</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<div class="container-fluid">
+    <div id="accordion">
+        @foreach (var item in Model)
+        {
+            <div class="card">
+                <div class="card-header">
+                    <a class="card-link showArticleClass" data-categoryid="@item.CategoryID" data-bs-toggle="collapse" href="#collapse_@item.CategoryID">
+                        <form>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">@item.CategoryID</span>
+                                </div>
+                                <input type="text" class="form-control text-bg-secondary font-weight-bold px-2" value="@item.ArticleName" disabled>
+                                <input type="text" class="form-control text-bg-secondary font-weight-bold px-2" value="@item.CategoryID" disabled>
+                                <input type="text" class="form-control text-bg-secondary font-weight-bold px-2" value="@item.SerialNumber" disabled>
+                                <input type="text" class="form-control text-bg-secondary font-weight-bold px-2" value="@item.Photopath" disabled>
+                                <input type="text" class="form-control text-bg-secondary font-weight-bold px-2" value="@item.Purchasedate" disabled>
+                                <input type="text" class="form-control text-bg-secondary font-weight-bold px-2" value="@item.Price" disabled>
+                                <input type="text" class="form-control text-bg-secondary font-weight-bold px-2" value="@item.Warranty" disabled>
+                                <input type="text" class="form-control text-bg-secondary font-weight-bold px-2" value="@item.Status" disabled>
+                                <input type="text" class="form-control text-bg-secondary font-weight-bold px-2" value="@item.Info" disabled>
+                            </div>
+                        </form>
+                    </a>
+                </div>
+                <div id="collapse_@item.CategoryID" class="collapse" data-parent="#accordion">
+                    <div class="card-body">
+                        <p>Ladataan categorian artikkeleita</p>
+                        @*<div id="articlesListed_@item.CategoryID"></div>*@
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+
+

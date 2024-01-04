@@ -118,5 +118,10 @@ namespace Vahapp2.Controllers
 
             return View(article);
         }
+
+        public ActionResult UserArticles()
+        {
+            return View("~/Views/Articles/UserArticles.cshtml");
+        }
     }
 }

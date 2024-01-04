@@ -31,6 +31,10 @@ namespace Vahapp2.Models
         public System.DateTime Purchasedate { get; set; }
         public string Status { get; set; }
         public string Warranty { get; set; }
+
+        public string Photopath { get; set; }
+
+        public string Info { get; set; }
     
         public virtual Categories Categories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
