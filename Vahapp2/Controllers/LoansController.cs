@@ -89,6 +89,10 @@ namespace Vahapp2.Controllers
             if (ModelState.IsValid)
             {
                 db.Loans.Add(loans);
+                Articles article = db.Articles.Find(loans.ArticleID);
+                article.Status = "Lainassa";
+
+                db.Entry(article).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
