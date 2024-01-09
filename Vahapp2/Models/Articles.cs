@@ -28,9 +28,14 @@ namespace Vahapp2.Models
        
         public Nullable<decimal> Price { get; set; }
         public byte[] Image { get; set; }
-        public System.DateTime Purchasedate { get; set; }
+        //Alla oleva koodi korjaa p‰iv‰m‰‰r‰ kent‰n muotoon ilman kellonaikaa
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy\\-MM\\-dd}", ApplyFormatInEditMode = true)]
+        public Nullable<System.DateTime> Purchasedate { get; set; }
         public string Status { get; set; }
         public string Warranty { get; set; }
+        public string Photopath { get; set; }
+        public string Info { get; set; }
     
         public virtual Categories Categories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

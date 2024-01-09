@@ -1,0 +1,86 @@
+﻿@model Vahapp2.Models.Articles
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+
+<div class="container-fluid">
+
+
+    <h4>@Model.Categories.CategoryName</h4>
+    <h1>@Model.ArticleName</h1>
+
+
+    <div class="row">
+
+
+
+        <div class="col-lg-4">
+            <div class="card mb-3">
+                <h3 class="card-header" style="background-color:black;color:white; padding:30px"></h3>
+                <div class="card-body">
+                    <h5 class="card-title"></h5>
+
+                </div>
+
+                <img style="height: 300px; width: 300px; display: block; margin-left: auto; margin-right: auto; margin-top:0px;" src="/Content/Images/@Model.Photopath" + item.Photopath" alt="Place for Image">
+
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item" style="font-weight:bold; font-size:large">Status</li>
+                    <li class="list-group-item" style="font-size:large">@Model.Status</li>
+                    <li class="list-group-item" style="font-weight: bold; font-size: large">Serialnumber</li>
+                    <li class="list-group-item" style="font-size:large">@Model.SerialNumber</li>
+
+                </ul>
+                @*<div class="card-body">
+                    </div>*@
+                <div class="card-footer text-muted" style="background-color:black; padding:30px;">
+                </div>
+            </div>
+
+
+
+
+        </div>
+        <div class="col-lg-4">
+            <div class="card mb-3">
+                <h5 class="card-header" style="background-color:black;padding:30px;color:white"></h5>
+                <div class="card-body">
+                    <h5 class="card-title"></h5>
+
+                </div>
+
+
+
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item" style="font-weight:bold;">Technical Information</li>
+                    <li class="list-group-item">@Model.Info</li>
+                    <li class="list-group-item" style="font-weight:bold;">Warranty</li>
+                    <li class="list-group-item">@Model.Warranty</li>
+                    <li class="list-group-item" style="font-weight:bold;">Purchase Price</li>
+                    <li class="list-group-item">@Model.Price€</li>
+                    <li class="list-group-item" style="font-weight:bold;">Purchased</li>
+                    <li class="list-group-item">@Model.Purchasedate</li>
+                    <li class="list-group-item">@Html.ActionLink("Back to List", "Index")</li>
+                </ul>
+                <div class="card-body">
+                    <a></a>
+                    <a></a>
+
+                </div>
+                <div class="card-footer text-muted" style="background-color:black;padding:30px;">
+
+                </div>
+            </div>
+
+
+
+            <div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
