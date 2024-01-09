@@ -16,31 +16,44 @@ namespace Vahapp2.Controllers
         // GET: Articles
         public ActionResult Index()
         {
-            if (Session["BasicUser"] == null && Session["AdminUser"] == null)
-            {
-                return RedirectToAction("login", "home");
-            }
+            
             //Tässä rajataan ulos kaikki muut paitsi sisäänkirjautuneet
-            else
+            if (Session["AdminUser"] != null)
             {
                 var articles = db.Articles.Include(a => a.Categories);
                 return View(articles.ToList());
+            }
+
+            else if (Session["BasicUser"] != null && Session["AdminUser"] == null)
+            {
+                var articles = db.Articles.Include(a => a.Categories);
+                return RedirectToAction("UserArticles", "Categories");
+            }
+
+            else
+            {
+                return RedirectToAction("login", "home");
             }
         }
 
         public ActionResult Create()
         {
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName");
-            //alla string tyyppinen lista statuksen arvoiksi
-            List<string> statusList = new List<string>
+            if (Session["AdminUser"] != null) 
             {
-                "Lainattavissa",
-                "OnLoan",
-                "Broken"
-            };
-            //Alla Statuksen Dropdownin koodi käyttää aikaisemmin luotua listaa
-            ViewBag.Status = new SelectList(statusList);
-            return View();
+                ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName");
+                //alla string tyyppinen lista statuksen arvoiksi
+                List<string> statusList = new List<string>
+                {
+                    "Lainattavissa",
+                    "OnLoan",
+                    "Broken"
+                };
+                //Alla Statuksen Dropdownin koodi käyttää aikaisemmin luotua listaa
+                ViewBag.Status = new SelectList(statusList);
+                return View();
+            }
+            else return RedirectToAction("login", "home");
+
         }
 
         // POST: Asiakkaat/Create
@@ -73,16 +86,22 @@ namespace Vahapp2.Controllers
 
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            if (Session["AdminUser"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Articles article = db.Articles.Find(id);
+                //if (article == null)
+                //{
+                //    return HttpNotFound();
+                //}
+                return View(article);
             }
-            Articles article = db.Articles.Find(id);
-            //if (article == null)
-            //{
-            //    return HttpNotFound();
-            //}
-            return View(article);
+            else return RedirectToAction("login", "home");
+
+
         }
 
 
@@ -118,26 +137,31 @@ namespace Vahapp2.Controllers
 
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            if (Session["AdminUser"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Articles article = db.Articles.Find(id);
-            if (article == null)
-            {
-                return HttpNotFound();
-            }
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Articles article = db.Articles.Find(id);
+                if (article == null)
+                {
+                    return HttpNotFound();
+                }
 
-            List<string> statusList = new List<string>
+                List<string> statusList = new List<string>
             {
                 "Lainattavissa",
                 "OnLoan",
                 "Broken"
             };
 
-            ViewBag.Status = new SelectList(statusList);
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName");
-            return View(article);
+                ViewBag.Status = new SelectList(statusList);
+                ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName");
+                return View(article);
+            }
+            else return RedirectToAction("login", "home");
+
         }
 
         // POST: Asiakkaat/Edit/5
@@ -231,9 +255,11 @@ namespace Vahapp2.Controllers
             return View(article);
         }
 
-        public ActionResult UserArticles()
+        public ActionResult UserArticles(int id)
         {
-            return View("~/Views/Articles/UserArticles.cshtml");
+            
+            var userarticles = db.Articles.Where(a => a.CategoryID == id);
+            return View(userarticles.ToList());
         }
     }
 }

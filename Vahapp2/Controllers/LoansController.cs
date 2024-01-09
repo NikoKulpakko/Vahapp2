@@ -160,6 +160,15 @@ namespace Vahapp2.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult UserLoans()
+
+        {
+            string username = User.Identity.Name;
+
+            List<Loans> loans = db.Loans.Where(l => l.Users.Name == username ).ToList();
+            return View(loans);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

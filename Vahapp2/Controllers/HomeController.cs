@@ -22,16 +22,11 @@ namespace Vahapp2.Controllers
 
         public ActionResult About()
         {
-            if (Session["BasicUser"] == null && Session["AdminUser"] == null)
-            {
-                return RedirectToAction("login", "home");
-            }
-            else
-            {
-                ViewBag.Message = "Your application description page.";
+            
+            ViewBag.Message = "Your application description page.";
 
-                return View();
-            }
+            return View();
+            
         }
 
         public ActionResult Contact()

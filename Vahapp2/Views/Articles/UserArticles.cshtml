@@ -1,70 +1,131 @@
 ﻿@model IEnumerable<Vahapp2.Models.Articles>
 
 @{
-    ViewBag.Title = "UserArticles";
+    ViewBag.Title = "Index";
 }
 
-@section scripts {
-    <script type="text/javascript">
-        $(function () {
-            $(".showArticleClass").click(function () {
-                let categoryId = $(this).data("CategoryID");
-                alert("klikkasit kategoriaa: " + categoryId);
-                //var url = "/Categories/_UserArticles/?CategoryID=" + articleId;
-                //$("_#articleInfo" + articleId).append(" <b>Ladataan categorian " + articleId + " rivejä...</b>");
+<h2>Articles</h2>
 
-                //var $detailDiv = $("#categoryInfo_" + articleId);
-                //$.get(url, function (data) {
-                //    $detailDiv.replaceWith(data);
-                
-            });
+@section scripts {
+
+    <script type="text/javascript">
+        $("#singleSelectedContactID").on("change", function () {
+
+            var selValue = $("#singleSelectedContactID").val();
+            document.getElementById("ContactType").value = selValue;
         });
     </script>
 }
 
-    <h2>Articles for loan</h2>
+<br />
+<br />
 
-<p>
+<p style="display:none">
     @Html.ActionLink("Create New", "Create")
 </p>
+<table class="table">
+    <tr>
+        <th>
+            Category
+        </th>
+        <th style="display:none">
+            @Html.DisplayNameFor(model => model.SerialNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ArticleName)
+        </th>
+        <th style="display:none">
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Info)
+        </th>
+        <th style="display:none">
+            @Html.DisplayNameFor(model => model.Purchasedate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th style="display:none">
+            @Html.DisplayNameFor(model => model.Warranty)
+        </th>
+        <th style="display:none">
+            @Html.DisplayNameFor(model => model.Photopath)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Image)
+        </th>
+        <th>
+            @*Control Panel*@
+        </th>
+    </tr>
+    @*Näkyvyysmääre on poistettu osasta kentistä listanäkymän selkeyttämiseksi.
+        Mikäli haluat kentän näkyviin poista style="display:none"*@
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Categories.CategoryName)
+            </td>
+            <td style="display:none">
+                @Html.DisplayFor(modelItem => item.SerialNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArticleName)
+            </td>
+            <td style="display:none">
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td style="height:200px; width:300px;">
+                @Html.DisplayFor(modelItem => item.Info)
+            </td>
+            <td style="display:none">
+                @Html.DisplayFor(modelItem => item.Purchasedate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td style="display:none">
+                @Html.DisplayFor(modelItem => item.Warranty)
+            </td>
+            <td style="display:none">
+                @Html.DisplayFor(modelItem => item.Photopath)
+            </td>
+            <td style="display:none">
+                @Html.DisplayFor(modelItem => item.Image)
+            </td>
+            <td>
+                @if (item.Photopath != null)
+                {
 
-<div class="container-fluid">
-    <div id="accordion">
-        @foreach (var item in Model)
-        {
-            <div class="card">
-                <div class="card-header">
-                    <a class="card-link showArticleClass" data-categoryid="@item.CategoryID" data-bs-toggle="collapse" href="#collapse_@item.CategoryID">
-                        <form>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">@item.CategoryID</span>
-                                </div>
-                                <input type="text" class="form-control text-bg-secondary font-weight-bold px-2" value="@item.ArticleName" disabled>
-                                <input type="text" class="form-control text-bg-secondary font-weight-bold px-2" value="@item.CategoryID" disabled>
-                                <input type="text" class="form-control text-bg-secondary font-weight-bold px-2" value="@item.SerialNumber" disabled>
-                                <input type="text" class="form-control text-bg-secondary font-weight-bold px-2" value="@item.Photopath" disabled>
-                                <input type="text" class="form-control text-bg-secondary font-weight-bold px-2" value="@item.Purchasedate" disabled>
-                                <input type="text" class="form-control text-bg-secondary font-weight-bold px-2" value="@item.Price" disabled>
-                                <input type="text" class="form-control text-bg-secondary font-weight-bold px-2" value="@item.Warranty" disabled>
-                                <input type="text" class="form-control text-bg-secondary font-weight-bold px-2" value="@item.Status" disabled>
-                                <input type="text" class="form-control text-bg-secondary font-weight-bold px-2" value="@item.Info" disabled>
-                            </div>
-                        </form>
-                    </a>
-                </div>
-                <div id="collapse_@item.CategoryID" class="collapse" data-parent="#accordion">
-                    <div class="card-body">
-                        <p>Ladataan categorian artikkeleita</p>
-                        @*<div id="articlesListed_@item.CategoryID"></div>*@
-                    </div>
-                </div>
-            </div>
-        }
-    </div>
-</div>
+                    var imgsrc = "/Content/Images/" + item.Photopath;
+                    <img src="@imgsrc" alt="There should be a picture here" style="width:200px; height:200px" />
+                }
+                else
+                { <img src="~/img/avatar-default.jpg" style="max-width:100px;max-height:100px" />
+                }
+            </td>
+            @*<td>
+                    @if (item.Image != null)
+                    {
+                        var base64 = Convert.ToBase64String(item.Image);
+                        var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                        <img src="@imgsrc" style="max-width:100px;max-height:100px" />
+                    }
+                    else
+                    { <img src="~/img/avatar-default.jpg" style="max-width:100px;max-height:100px" />
+                    }
+                </td>*@
 
 
 
+            <td>
+                @*@Html.ActionLink("Edit", "Edit", new { id = item.ArticleID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ArticleID }) |
+                @Html.ActionLink("Images", "InsertPicture", new { id = item.ArticleID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ArticleID })*@
+            </td>
+        </tr>
+    }
 
-
+</table>
