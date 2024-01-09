@@ -11,7 +11,8 @@ namespace Vahapp2.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Loans
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,8 +24,18 @@ namespace Vahapp2.Models
         public int LoanID { get; set; }
         public int UserID { get; set; }
         public int ArticleID { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd\\.MM\\.yyyy}", ApplyFormatInEditMode = true)]
+
         public System.DateTime Loandate { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd\\.MM\\.yyyy}", ApplyFormatInEditMode = true)]
         public System.DateTime Returndate { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd\\.MM\\.yyyy}", ApplyFormatInEditMode = true)]
         public System.DateTime Duedate { get; set; }
     
         public virtual Articles Articles { get; set; }
