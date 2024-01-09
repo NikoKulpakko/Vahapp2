@@ -1,0 +1,36 @@
+﻿@model Vahapp2.Models.Articles
+
+@{
+    ViewBag.Title = "InsertPicture";
+
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+<h2>@ViewBag.Polku</h2>
+
+@using (Html.BeginForm("InsertPicture", "Articles", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.ArticleID)
+    @Html.HiddenFor(model => model.Status)
+    @Html.HiddenFor(model => model.ArticleName)
+
+    @Html.HiddenFor(model => model.Purchasedate)
+
+    @Html.HiddenFor(model => model.CategoryID)
+    @Html.HiddenFor(model => model.Warranty)
+    @Html.HiddenFor(model => model.Info)
+    @Html.HiddenFor(model => model.SerialNumber)
+    @Html.HiddenFor(model => model.Price)
+    @Html.HiddenFor(model => model.Photopath)
+
+
+    <span>Select File:</span>
+    <input type="file" name="postedFile" />
+    <hr />
+    <input type="submit" value="Upload" />
+    <br />
+    <span style="color:green">@TempData["Message"]</span>
+}
+

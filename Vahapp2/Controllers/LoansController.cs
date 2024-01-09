@@ -60,7 +60,7 @@ namespace Vahapp2.Controllers
                 ad.ArticleID = a.ArticleID;
                 ad.ArticleName = a.ArticleName;
                 ad.Status = a.Status;
-                if (a.Status == "Lainattavissa") { 
+                if (a.Status == "Available") { 
                 list.Add(ad);
                 }
             }
@@ -89,6 +89,10 @@ namespace Vahapp2.Controllers
             if (ModelState.IsValid)
             {
                 db.Loans.Add(loans);
+                Articles article = db.Articles.Find(loans.ArticleID);
+                article.Status = "OnLoan";
+
+                db.Entry(article).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -155,9 +159,21 @@ namespace Vahapp2.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Loans loans = db.Loans.Find(id);
+            Articles article = db.Articles.Find(loans.ArticleID);
+            article.Status = "Available";
+            db.Entry(article).State = EntityState.Modified;
             db.Loans.Remove(loans);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult UserLoans()
+
+        {
+            string username = User.Identity.Name;
+
+            List<Loans> loans = db.Loans.Where(l => l.Users.Name == username ).ToList();
+            return View(loans);
         }
 
         protected override void Dispose(bool disposing)

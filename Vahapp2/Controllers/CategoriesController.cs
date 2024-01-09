@@ -124,6 +124,12 @@ namespace Vahapp2.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult UserArticles()
+        {
+            var userarticles = db.Categories.Include(c => c.Articles).ToList();
+            return View(userarticles.ToList());
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

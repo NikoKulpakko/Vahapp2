@@ -20,7 +20,7 @@
 <br />
 <br />
 
-<p>
+<p style="display:none">
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
@@ -56,7 +56,7 @@
             @Html.DisplayNameFor(model => model.Image)
         </th>
         <th>
-            Control Panel
+            @*Control Panel*@
         </th>
     </tr>
     @*Näkyvyysmääre on poistettu osasta kentistä listanäkymän selkeyttämiseksi.
@@ -118,16 +118,14 @@
                 </td>*@
 
 
-            
+
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ArticleID }) |
+                @*@Html.ActionLink("Edit", "Edit", new { id = item.ArticleID }) |
                 @Html.ActionLink("Details", "Details", new { id = item.ArticleID }) |
                 @Html.ActionLink("Images", "InsertPicture", new { id = item.ArticleID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ArticleID })
+                @Html.ActionLink("Delete", "Delete", new { id = item.ArticleID })*@
             </td>
         </tr>
     }
 
 </table>
-
-

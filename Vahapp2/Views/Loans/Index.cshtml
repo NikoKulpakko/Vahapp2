@@ -1,55 +1,56 @@
 ﻿@*@model Vahapp2.Models.Loans*@
 @model IEnumerable<Vahapp2.Models.Loans>
 
+
 @{
     ViewBag.Title = "Index";
 }
-@*Tässä rajataan koko näkymä ainoastaan adminille. Alle on Elseen on kehitettävä esim. 
-Viewbagillä näkymä missä user näkee vain omat lainat?*@
+@*Tässä rajataan koko näkymä ainoastaan adminille. Alle on Elseen on kehitettävä
+    näkymä missä user näkee vain omat lainat?*@
 @{ if (Session["AdminUser"] != null)
     {
         <h2>Loans</h2>
 
-<br/>
-<button onclick="location.href='@Url.Action("Create", "Loans")'" class="btn btn-primary">Create New Loan</button>
-<br/>
-<br/>
-<h3>All loans</h3>
-<h4>Total loans @Model.Count()</h4>
+        <br />
+        <button onclick="location.href='@Url.Action("Create", "Loans")'" class="btn btn-primary">Create New Loan</button>
+        <br />
+        <br />
+        <h3>All loans</h3>
+        <h4>Total loans @Model.Count()</h4>
 
-<table class="table table-hover">
-    <tr>
+        <table class="table table-hover">
+            <tr>
 
 
-        <th>
-            @Html.DisplayNameFor(model => model.Users.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Users.UserID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Users.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Articles.ArticleName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Articles.ArticleID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Articles.Categories.CategoryName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Loandate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Returndate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Duedate)
-        </th>
-        <th></th>
-    </tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Users.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Users.UserID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Users.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Articles.ArticleName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Articles.ArticleID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Articles.Categories.CategoryName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Loandate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Returndate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Duedate)
+                </th>
+                <th></th>
+            </tr>
 
             @foreach (var item in Model)
             {
@@ -86,7 +87,7 @@ Viewbagillä näkymä missä user näkee vain omat lainat?*@
                     <td>
                         @Html.ActionLink("Edit", "Edit", new { id = item.LoanID }) |
                         @Html.ActionLink("Details", "Details", new { id = item.LoanID }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.LoanID })
+                        @Html.ActionLink("Return", "Delete", new { id = item.LoanID })
                     </td>
                 </tr>
             }
@@ -96,8 +97,47 @@ Viewbagillä näkymä missä user näkee vain omat lainat?*@
 
     else if (Session["BasicUser"] != null)
     {
-        <h2>Own Loans</h2>
+            
+
+    < h2 > Own Loans </ h2 >
+
+@*<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserID)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <a href="~/Loans/UserLoans/@item.LoanID">
+                    @Html.DisplayFor(modelItem => item.LoanID)
+                </a>
+
+            </td>
+
+
+            @{ if (Session["AdminUser"] != null)
+                {
+
+
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.LoanID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.LoanID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.LoanID })
+                    </td>
+                }
+
+
+            }
+        </tr>
     }
+
+</table>*@
+}
 
 }
 
