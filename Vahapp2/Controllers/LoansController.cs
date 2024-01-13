@@ -60,7 +60,7 @@ namespace Vahapp2.Controllers
                 ad.ArticleID = a.ArticleID;
                 ad.ArticleName = a.ArticleName;
                 ad.Status = a.Status;
-                if (a.Status == "Lainattavissa") { 
+                if (a.Status == "Available") { 
                 list.Add(ad);
                 }
             }
@@ -89,6 +89,10 @@ namespace Vahapp2.Controllers
             if (ModelState.IsValid)
             {
                 db.Loans.Add(loans);
+                Articles article = db.Articles.Find(loans.ArticleID);
+                article.Status = "OnLoan";
+
+                db.Entry(article).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -156,6 +160,10 @@ namespace Vahapp2.Controllers
         {
             Loans loans = db.Loans.Find(id);
             db.Loans.Remove(loans);
+            Articles article = db.Articles.Find(loans.ArticleID);
+            article.Status = "Available";
+
+            db.Entry(article).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

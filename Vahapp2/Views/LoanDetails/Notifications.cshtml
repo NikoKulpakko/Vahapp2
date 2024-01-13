@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Vahapp2.Models.LoanDetails>
+
+@{
+    ViewBag.Title = "Notifications";
+}
+
+<h2>Notifications</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Loans.LoanID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Users.Password)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Loans.LoanID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Users.Password)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.LoanDetailID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.LoanDetailID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.LoanDetailID })
+        </td>
+    </tr>
+}
+
+</table>

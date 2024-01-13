@@ -7,6 +7,7 @@ using System.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Web.Services.Description;
 
 namespace Vahapp2.Controllers
 {
@@ -32,11 +33,11 @@ namespace Vahapp2.Controllers
         {
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName");
             //alla string tyyppinen lista statuksen arvoiksi
+            //koodia muutettu että tarjoaa vain yhden arvon
             List<string> statusList = new List<string>
             {
-                "Lainattavissa",
-                "OnLoan",
-                "Broken"
+                "Available"
+                
             };
             //Alla Statuksen Dropdownin koodi käyttää aikaisemmin luotua listaa
             ViewBag.Status = new SelectList(statusList);
@@ -53,9 +54,8 @@ namespace Vahapp2.Controllers
             //Alla string tyyppinen lista statuksen arvoksi
             List<string> statusList = new List<string>
             {
-                "Lainattavissa",
-                "OnLoan",
-                "Broken"
+                "Available"
+                
             };
             if (ModelState.IsValid)
             {
@@ -110,6 +110,7 @@ namespace Vahapp2.Controllers
 
             catch (Exception)
             {
+                
 
                 return View("Error");
             }
@@ -128,14 +129,14 @@ namespace Vahapp2.Controllers
                 return HttpNotFound();
             }
 
-            List<string> statusList = new List<string>
-            {
-                "Lainattavissa",
-                "OnLoan",
-                "Broken"
-            };
+            //List<string> statusList = new List<string>
+            //{
+            //    "Lainattavissa",
+            //    "OnLoan",
+            //    "Broken"
+            //};
 
-            ViewBag.Status = new SelectList(statusList);
+            //ViewBag.Status = new SelectList(statusList);
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName");
             return View(article);
         }
@@ -147,12 +148,12 @@ namespace Vahapp2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ArticleID,CategoryID,SerialNumber,ArticleName,Price,Image,Purchasedate,Status,Warranty,Info,Photopath")] Articles article)
         {
-            List<string> statusList = new List<string>
-            {
-                "Lainattavissa",
-                "OnLoan",
-                "Broken"
-            };
+            //List<string> statusList = new List<string>
+            //{
+            //    "Lainattavissa",
+            //    "OnLoan",
+            //    "Broken"
+            //};
             if (ModelState.IsValid)
             {
                 db.Entry(article).State = EntityState.Modified;
@@ -163,7 +164,7 @@ namespace Vahapp2.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryID", article.CategoryID);
-            ViewBag.Status = new SelectList(statusList, "Status", "Status", article.Status);
+            //ViewBag.Status = new SelectList(statusList, "Status", "Status", article.Status);
             return View(article);
         }
 
@@ -182,10 +183,18 @@ namespace Vahapp2.Controllers
         public ActionResult InsertPicture([Bind(Include = "ArticleID,CategoryID,SerialNumber,ArticleName,Price,Image,Purchasedate,Status,Warranty,Photopath,Info,postedFile")] Articles article)
         {
             string id = article.ArticleID.ToString();
-
+            List<string> allowedImageTypes = new List<string> { "image/jpeg", "image/png", "image/jpg" };
             if (Request.Files.Count > 0)
             {
                 HttpPostedFileBase postedFile = Request.Files["postedFile"];
+                
+                if(!allowedImageTypes.Contains(postedFile.ContentType))
+                {
+                    return View("Error");
+                }
+            //Ohjelma tarkistaa onko ladattu tiedosto kuva.Tukee jpeg,png,jpg muotoja
+                
+
                 string path = Server.MapPath("~/Content/Images/");
                 if (!Directory.Exists(path))
                 {
@@ -219,6 +228,9 @@ namespace Vahapp2.Controllers
 
                 db.SaveChanges();
             }
+           
+                
+            
 
             return RedirectToAction("Index");
         }
@@ -230,5 +242,8 @@ namespace Vahapp2.Controllers
 
             return View(article);
         }
+
+        
     }
+
 }

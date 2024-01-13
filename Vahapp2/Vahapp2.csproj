@@ -157,6 +157,7 @@
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\DropdownController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoanDetailsController.cs" />
     <Compile Include="Controllers\LoansController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Data\ArticleData.cs" />
@@ -290,6 +291,7 @@
     <Content Include="Views\Admin\Login.cshtml" />
     <Content Include="Views\Articles\InsertPicture.cshtml" />
     <Content Include="Views\Articles\Details.cshtml" />
+    <Content Include="Views\LoanDetails\Notifications.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

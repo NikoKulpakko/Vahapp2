@@ -5,7 +5,8 @@
 }
 
 <h2>Articles</h2>
-
+<h4>You can see more detailed info about the Articles from Details. <br />
+   Uploading images can be done in Images section.  </h4>
 @section scripts {
 
     <script type="text/javascript">
@@ -102,7 +103,7 @@
                     <img src="@imgsrc" alt="There should be a picture here" style="width:200px; height:200px" />
                 }
                 else
-                { <img src="~/img/avatar-default.jpg" style="max-width:100px;max-height:100px" />
+                { <img src="~/img/avatar-default.jpg" style="width:200px;height:200px;background-color:gray;" />
                 }
             </td>
             @*<td>
@@ -123,7 +124,14 @@
                 @Html.ActionLink("Edit", "Edit", new { id = item.ArticleID }) |
                 @Html.ActionLink("Details", "Details", new { id = item.ArticleID }) |
                 @Html.ActionLink("Images", "InsertPicture", new { id = item.ArticleID }) |
+                @if (item.Status == "OnLoan")
+                {
+                <p style="display:inline" > Article is OnLoan</p>
+                }
+                else
+                {
                 @Html.ActionLink("Delete", "Delete", new { id = item.ArticleID })
+                }
             </td>
         </tr>
     }
