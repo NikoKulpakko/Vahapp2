@@ -159,6 +159,9 @@ namespace Vahapp2.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Loans loans = db.Loans.Find(id);
+            Articles article = db.Articles.Find(loans.ArticleID);
+            article.Status = "Available";
+            db.Entry(article).State = EntityState.Modified;
             db.Loans.Remove(loans);
             Articles article = db.Articles.Find(loans.ArticleID);
             article.Status = "Available";
@@ -166,6 +169,15 @@ namespace Vahapp2.Controllers
             db.Entry(article).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult UserLoans()
+
+        {
+            string username = User.Identity.Name;
+
+            List<Loans> loans = db.Loans.Where(l => l.Users.Name == username ).ToList();
+            return View(loans);
         }
 
         protected override void Dispose(bool disposing)

@@ -40,32 +40,54 @@
         </div>
     </div>
 
-
-
     <div class="form-group">
-        @Html.LabelFor(model => model.Loandate, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.Loandate)
         <div class="col-md-10">
-            <input type="date" id="Loandate" name="Loandate" class="form-control" />
+            @Html.TextBoxFor(model => model.Loandate, new { type = "date", id = "loanday", onchange = "changeDay()", @class = "form-control" })
             @Html.ValidationMessageFor(model => model.Loandate, "", new { @class = "text-danger" })
         </div>
     </div>
 
-
     <div class="form-group">
-        @Html.LabelFor(model => model.Returndate, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <input type="date" id="Returndate" name="Returndate" class="form-control" />
+        @Html.LabelFor(model => model.Returndate)
+        <div class="form-group">
+            @Html.TextBoxFor(model => model.Returndate, new { @readonly = "readonly", type = "date", id = "returnday", @class = "form-control" })
             @Html.ValidationMessageFor(model => model.Returndate, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Duedate, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <input type="date" id="Duedate" name="Duedate" class="form-control" />
+        @Html.LabelFor(model => model.Duedate)
+        <div class="form-group">
+            @Html.TextBoxFor(model => model.Duedate, new { @readonly = "readonly", type = "date", id = "dueday", @class = "form-control" })
             @Html.ValidationMessageFor(model => model.Duedate, "", new { @class = "text-danger" })
         </div>
     </div>
+
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.Loandate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="date" id="Loandate" name="Loandate" class="form-control" />
+                @Html.ValidationMessageFor(model => model.Loandate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Returndate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="date" id="Returndate" name="Returndate" class="form-control" />
+                @Html.ValidationMessageFor(model => model.Returndate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Duedate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="date" id="Duedate" name="Duedate" class="form-control" />
+                @Html.ValidationMessageFor(model => model.Duedate, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
@@ -91,21 +113,44 @@
         var firstDropdown = document.getElementById("firstdd")
 
         // Määritellää funktio
-        async function getJson() {
-            //Haetaan categoryID arvo ensimmäisestä dropdownista
-            let id = firstDropdown.value
+          async function getJson() {
+                //Haetaan categoryID arvo ensimmäisestä dropdownista
+                let id = firstDropdown.value
 
-            let x = `<select class="form-control" id="ArticleID" name="ArticleID">` // select listin alkutägi
+                let x = `<select class="form-control" id="ArticleID" name="ArticleID">` // select listin alkutägi
 
-            const respons = await fetch("http://localhost:52395/Loans/selection/"+id ) //Haetaan kaikki artikkelit categoryID avulla
-            const articles = await respons.json() // muunnetaan json vastaus javascript muotoon
-            await articles.map(a => {
-                x += `<option value="${a.ArticleID}">${a.ArticleName}</option>` // map silmukka
-            })
+                const respons = await fetch("http://localhost:52395/Loans/selection/"+id ) //Haetaan kaikki artikkelit categoryID avulla
+                const articles = await respons.json() // muunnetaan json vastaus javascript muotoon
+                await articles.map(a => {
+                    x += `<option value="${a.ArticleID}">${a.ArticleName}</option>` // map silmukka
+                })
 
-            x += `</select>` // päättyvä tägi
+                x += `</select>` // päättyvä tägi
 
-            document.getElementById("place").innerHTML = x // sijoitus html sivulle
+                document.getElementById("place").innerHTML = x // sijoitus html sivulle
+        }
+
+            function changeDay() {
+                // Haetaan ensimmäisen kentän arvo
+                var loanday = document.getElementById('loanday').value;
+
+                // Luodaan uusi Date-objekti ensimmäisen kentän arvosta
+                var date = new Date(loanday);
+
+                // Määritellään lainan pituus
+                date.setDate(date.getDate() + 5);
+
+                // Haetaan päivämäärän muotoilu (esimerkiksi "2024-01-08")
+                var changeDay = date.toISOString().split('T')[0];
+                var returnDay = changeDay
+
+                //Asetetaan erääntymispäiväksi lainapäivän +5pvä 
+                document.getElementById('dueday').value = changeDay;
+
+                // Asetetaan palautuspäiväksi saman, kun erääntymispäivä
+                document.getElementById('returnday').value = returnDay;
+
+
         }
 
 

@@ -13,7 +13,7 @@ namespace Vahapp2.Models
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
-
+    
     public partial class tblAdmins
     {
         public int AdminId { get; set; }
@@ -26,7 +26,6 @@ namespace Vahapp2.Models
         [Required]
         [DisplayName("Password")]
         public string AdminPass { get; set; }
-
         public string LoginErrorMessage { get; set; }
     }
 }

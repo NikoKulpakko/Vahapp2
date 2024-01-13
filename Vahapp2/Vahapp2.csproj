@@ -292,6 +292,7 @@
     <Content Include="Views\Articles\InsertPicture.cshtml" />
     <Content Include="Views\Articles\Details.cshtml" />
     <Content Include="Views\LoanDetails\Notifications.cshtml" />
+    <Content Include="Views\Articles\UserArticles.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
