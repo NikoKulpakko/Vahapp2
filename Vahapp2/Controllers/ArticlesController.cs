@@ -44,7 +44,7 @@ namespace Vahapp2.Controllers
                 //alla string tyyppinen lista statuksen arvoiksi
                 List<string> statusList = new List<string>
                 {
-                    "Lainattavissa",
+                    "Available",
                     "OnLoan",
                     "Broken"
                 };
@@ -66,7 +66,7 @@ namespace Vahapp2.Controllers
             //Alla string tyyppinen lista statuksen arvoksi
             List<string> statusList = new List<string>
             {
-                "Lainattavissa",
+                "Available",
                 "OnLoan",
                 "Broken"
             };
