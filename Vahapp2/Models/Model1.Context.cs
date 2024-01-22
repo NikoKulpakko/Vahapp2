@@ -31,5 +31,6 @@ namespace Vahapp2.Models
         public virtual DbSet<Loans> Loans { get; set; }
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<tblAdmins> tblAdmins { get; set; }
+        public virtual DbSet<Notifications> Notifications { get; set; }
     }
 }

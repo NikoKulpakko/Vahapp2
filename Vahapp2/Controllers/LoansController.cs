@@ -10,6 +10,7 @@ using Vahapp2.Data;
 using Vahapp2.Models;
 
 
+
 namespace Vahapp2.Controllers
 {
     public class LoansController : Controller
@@ -19,6 +20,8 @@ namespace Vahapp2.Controllers
         //GET: Loans
         public ActionResult Index()
         {
+            
+            ViewBag.Notif = db.Notifications.FirstOrDefault();
             if (Session["BasicUser"] == null && Session["AdminUser"] == null)
             {
                 return RedirectToAction("login", "home");
@@ -163,11 +166,9 @@ namespace Vahapp2.Controllers
             article.Status = "Available";
             db.Entry(article).State = EntityState.Modified;
             db.Loans.Remove(loans);
-            Articles article = db.Articles.Find(loans.ArticleID);
-            article.Status = "Available";
-
-            db.Entry(article).State = EntityState.Modified;
             db.SaveChanges();
+
+            
             return RedirectToAction("Index");
         }
 
@@ -188,5 +189,7 @@ namespace Vahapp2.Controllers
             }
             base.Dispose(disposing);
         }
+
+        
     }
 }

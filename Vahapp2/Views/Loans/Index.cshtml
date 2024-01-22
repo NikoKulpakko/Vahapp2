@@ -5,6 +5,16 @@
 @{
     ViewBag.Title = "Index";
 }
+<script>
+    function myFunction() {
+        document.getElementById("exnotif").textContent = "Note sent!";
+    }
+</script>
+
+
+
+
+
 @*Tässä rajataan koko näkymä ainoastaan adminille. Alle on Elseen on kehitettävä
     näkymä missä user näkee vain omat lainat?*@
 @{ if (Session["AdminUser"] != null)
@@ -13,7 +23,7 @@
 
         <br />
         <button onclick="location.href='@Url.Action("Create", "Loans")'" class="btn btn-primary">Create New Loan</button>
-        <br />
+        <button onclick="location.href='@Url.Action("SetNotifications", "LoanDetails")'" class="btn btn-primary">Set Up Notifications</button>
         <br />
         <h3>All loans</h3>
         <h4>Total loans @Model.Count()</h4>
@@ -82,7 +92,19 @@
                         @Html.DisplayFor(modelItem => item.Returndate)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Duedate)
+                        @if (item.Duedate < DateTime.Today)
+                        {
+                            <p style="color:red;" id="exnotif">Loan Expired!!</p> <br />
+                            if (ViewBag.Notif != null)
+                            {
+                            <button onclick="myFunction(); location.href = '@Url.Action("Notifications", "LoanDetails", new { id = item.LoanID })'" class="btn btn-primary">Notify By Email</button>
+                                
+                            }
+                        }
+                        else
+                        {
+                            <p style="color:forestgreen;">Loan Active</p>
+                        }
                     </td>
                     <td>
                         @Html.ActionLink("Edit", "Edit", new { id = item.LoanID }) |
@@ -97,48 +119,47 @@
 
     else if (Session["BasicUser"] != null)
     {
-            
-
-    < h2 > Own Loans </ h2 >
-
-@*<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.UserID)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                <a href="~/Loans/UserLoans/@item.LoanID">
-                    @Html.DisplayFor(modelItem => item.LoanID)
-                </a>
-
-            </td>
 
 
-            @{ if (Session["AdminUser"] != null)
+        < h2 > Own Loans </ h2 >
+
+        @*<table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserID)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
                 {
+                    <tr>
+                        <td>
+                            <a href="~/Loans/UserLoans/@item.LoanID">
+                                @Html.DisplayFor(modelItem => item.LoanID)
+                            </a>
+
+                        </td>
 
 
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.LoanID }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.LoanID }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.LoanID })
-                    </td>
+                        @{ if (Session["AdminUser"] != null)
+                            {
+
+
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.LoanID }) |
+                                    @Html.ActionLink("Details", "Details", new { id = item.LoanID }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.LoanID })
+                                </td>
+                            }
+
+
+                        }
+                    </tr>
                 }
 
-
-            }
-        </tr>
+            </table>*@
     }
 
-</table>*@
-}
 
 }
-
-

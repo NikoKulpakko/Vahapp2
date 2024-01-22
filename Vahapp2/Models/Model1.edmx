@@ -47,6 +47,17 @@
           <Property Name="Returndate" Type="datetime" Nullable="false" />
           <Property Name="Duedate" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="Notifications">
+          <Key>
+            <PropertyRef Name="NotifID" />
+          </Key>
+          <Property Name="NotifID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sapo" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="SsHash" Type="binary" MaxLength="64" Nullable="false" />
+          <Property Name="Otsikko" Type="nvarchar" MaxLength="40" />
+          <Property Name="Viesti" Type="nvarchar" MaxLength="40" />
+          <Property Name="ExtraField" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="tblAdmins">
           <Key>
             <PropertyRef Name="AdminId" />
@@ -131,6 +142,7 @@
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoanDetails" EntityType="Self.LoanDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Loans" EntityType="Self.Loans" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblAdmins" EntityType="Self.tblAdmins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Articles_Categories" Association="Self.FK_Articles_Categories">
@@ -307,6 +319,7 @@
             <End Role="Loans" EntitySet="Loans" />
           </AssociationSet>
           <EntitySet Name="tblAdmins" EntityType="VahappModel.tblAdmins" />
+          <EntitySet Name="Notifications" EntityType="VahappModel.Notifications" />
         </EntityContainer>
         <EntityType Name="tblAdmins">
           <Key>
@@ -316,6 +329,17 @@
           <Property Name="AdminName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AdminEmail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AdminPass" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Notifications">
+          <Key>
+            <PropertyRef Name="NotifID" />
+          </Key>
+          <Property Name="NotifID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sapo" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="SsHash" Type="Binary" Nullable="false" MaxLength="64" FixedLength="true" />
+          <Property Name="Otsikko" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="Viesti" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="ExtraField" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -387,6 +411,18 @@
                 <ScalarProperty Name="AdminEmail" ColumnName="AdminEmail" />
                 <ScalarProperty Name="AdminName" ColumnName="AdminName" />
                 <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notifications">
+            <EntityTypeMapping TypeName="VahappModel.Notifications">
+              <MappingFragment StoreEntitySet="Notifications">
+                <ScalarProperty Name="ExtraField" ColumnName="ExtraField" />
+                <ScalarProperty Name="Viesti" ColumnName="Viesti" />
+                <ScalarProperty Name="Otsikko" ColumnName="Otsikko" />
+                <ScalarProperty Name="SsHash" ColumnName="SsHash" />
+                <ScalarProperty Name="Sapo" ColumnName="Sapo" />
+                <ScalarProperty Name="NotifID" ColumnName="NotifID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

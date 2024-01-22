@@ -1,0 +1,66 @@
+﻿@model Vahapp2.Models.Notifications
+
+<p>
+    VaHapp2 Uses Gmail to notify expired loans. <br /> You can enter the info in this form. <br />
+    Two factor Authentication must be turned on and AppPassword is required.<br />
+    You can configure only one notifier settings at the time. If you want to make new settings.<br />
+    Just fill in the form and submit and the info will be replaced automatically<br /> and the previous settings will be deleted.
+    <br /> By disabling the notifications, notify by email buttons are not available<br /> and notification data is deleted from database.
+</p>
+
+@using (Html.BeginForm("SetNotifications", "LoanDetails", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.Label("Sending Email")
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Sapo)
+        </div>
+    </div>
+    <br />
+
+    <div class="form-group">
+        @Html.Label("Email Subject")
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Otsikko)
+        </div>
+    </div>
+    <br />
+
+    <div class="form-group">
+        @Html.Label("Message")
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Viesti)
+        </div>
+    </div>
+    <br />
+
+    <div class="form-group">
+        @Html.Label("AppPass")
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.ExtraField)
+        </div>
+    </div>
+    <br />
+
+
+
+    @Html.HiddenFor(model => model.SsHash)
+
+
+
+
+    <input type="submit" value="Create" class="btn btn-default" />
+
+}
+
+<div>
+    @if (ViewBag.Notif != null)
+    {
+    <button onclick="location.href='@Url.Action("DeleteNotifications", "LoanDetails")'" class="btn btn-primary">Disable Notifications</button>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

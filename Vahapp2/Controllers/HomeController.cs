@@ -23,7 +23,7 @@ namespace Vahapp2.Controllers
         public ActionResult About()
         {
             
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Vahapp is storage control and loan management software.";
 
             return View();
             

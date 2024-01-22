@@ -45,9 +45,9 @@ namespace Vahapp2.Controllers
                 //alla string tyyppinen lista statuksen arvoiksi
                 List<string> statusList = new List<string>
                 {
-                    "Lainattavissa",
-                    "OnLoan",
-                    "Broken"
+                    "Available"
+                    
+               
                 };
                 //Alla Statuksen Dropdownin koodi käyttää aikaisemmin luotua listaa
                 ViewBag.Status = new SelectList(statusList);
@@ -160,10 +160,7 @@ namespace Vahapp2.Controllers
             //ViewBag.Status = new SelectList(statusList);
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName");
             return View(article);
-        }
-                ViewBag.Status = new SelectList(statusList);
-                ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName");
-                return View(article);
+        
             }
             else return RedirectToAction("login", "home");
 

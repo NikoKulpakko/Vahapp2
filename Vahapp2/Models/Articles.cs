@@ -25,9 +25,9 @@ namespace Vahapp2.Models
         public int CategoryID { get; set; }
         public string SerialNumber { get; set; }
         public string ArticleName { get; set; }
-       
         public Nullable<decimal> Price { get; set; }
         public byte[] Image { get; set; }
+
         //Alla oleva koodi korjaa p‰iv‰m‰‰r‰ kent‰n muotoon ilman kellonaikaa
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy\\-MM\\-dd}", ApplyFormatInEditMode = true)]

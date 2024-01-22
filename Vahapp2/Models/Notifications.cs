@@ -12,13 +12,13 @@ namespace Vahapp2.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tblAdmins
+    public partial class Notifications
     {
-        public int AdminId { get; set; }
-        public string AdminName { get; set; }
-        public string AdminEmail { get; set; }
-        public string AdminPass { get; set; }
-
-        public string LoginErrorMessage { get; set; }
+        public int NotifID { get; set; }
+        public string Sapo { get; set; }
+        public byte[] SsHash { get; set; }
+        public string Otsikko { get; set; }
+        public string Viesti { get; set; }
+        public string ExtraField { get; set; }
     }
 }

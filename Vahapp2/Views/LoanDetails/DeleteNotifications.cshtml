@@ -1,0 +1,62 @@
+﻿@model Vahapp2.Models.Notifications
+
+@{
+    ViewBag.Title = "DeleteNotifications";
+}
+
+
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Sapo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sapo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SsHash)
+        </dt>
+
+        <dd>
+            @Html.HiddenFor(model => model.SsHash)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Otsikko)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Otsikko)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Viesti)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Viesti)
+        </dd>
+
+        
+
+        <dd>
+            @Html.HiddenFor(model => model.ExtraField)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index","Loans")
+        </div>
+    }
+</div>
